@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+
+    <head>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta charset="utf-8"/>
+        <title>Obigo WebApp</title>
+        <script language="javascript" >
+            var WIDGET_INSTALLATION_STARTED = 0,
+                WIDGET_INSTALLATION_COMPLETED = 1,
+                WIDGET_INSTALLATION_FAILED = 2,
+                WIDGET_UNINSTALLATION_STARTED = 3,
+                WIDGET_UNINSTALLATION_COMPLETED = 4,
+                WIDGET_UNINSTALLATION_FAILED = 5,
+                WIDGET_INSTALLATION_UPDATE_STARTED = 6,
+                WIDGET_INSTALLATION_UPDATE_COMPLETED = 7,
+                WIDGET_INSTALLATION_UPDATE_FAILED = 8,
+
+                WIDGET_ERROR_STORAGE_AREA_FULL = 10,
+                WIDGET_ERROR_DOWNLOAD = 11,
+                WIDGET_ERROR_INVALID_ZIP_ARCHIVE = 12,
+                WIDGET_ERROR_INVALID_SIGNATURE = 13,
+                WIDGET_ERROR_GENERIC = 14,
+                WIDGET_ERROR_SIZE_EXCEEDED = 15,
+                WIDGET_ERROR_INVALID_UPDATE = 16;
+
+            var WIDGET_UPGRADE_AVAILABLE  = 0,
+                WIDGET_UPGRADE_UNAVAILABLE = 1;
+
+
+
+            var appMgr = window.applicationManager;
+            if(appMgr){
+                appMgr.addEventListener('ApplicationLoaded', function (childApplication) {
+                    console.log('ApplicationLoaded : ================================');
+                    setTimeout(function(){
+                        childApplication.show();
+                    }, 100);
+                }, false);
+                appMgr.addEventListener('LatestUpdate', function (appList, state) {
+                    window.updateAppList(appList);
+                }, false);
+                appMgr.addEventListener('WidgetInstallation', function (wd, state, reason) {
+                    if(state === WIDGET_INSTALLATION_COMPLETED){
+                        window.installNext(wd, state, reson);
+
+                    }else if(state === WIDGET_INSTALLATION_UPDATE_COMPLETED){
+                        window.installNext(wd, state, reson);
+
+                    } 
+                    
+                    
+                }, false);
+            }
+        </script>
+
+    </head>
+    <body>
+        <div id="app">
+        </div>
+    </body>
+</html>
